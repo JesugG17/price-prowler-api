@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { ScrapingRoutes } from './scraping/routes';
 export class AppRoutes {
 
 
@@ -6,6 +7,7 @@ export class AppRoutes {
         const router = Router();
 
         // Define all api routes
+        router.use(ScrapingRoutes.routes);
 
         return router;
     }
