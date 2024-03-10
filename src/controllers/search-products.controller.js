@@ -8,9 +8,10 @@ export class SearchController {
       slowMo: 200,
     });
 
+    // _OrderId_PRICE_NoIndex_True
     const page = await browser.newPage();
 
-    await page.goto(`https://listado.mercadolibre.com.mx/${productName}`);
+    await page.goto(`https://listado.mercadolibre.com.mx/${productName}_OrderId_PRICE_NoIndex_True`);
 
     const result = await page.evaluate(() => {
       const productItemsNodeList = document.querySelectorAll('.ui-search-result__wrapper');
