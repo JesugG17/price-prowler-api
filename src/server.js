@@ -2,12 +2,14 @@ import express from 'express';
 import cors from 'cors';
 
 import SearchRouter from './routes/search-products.routes.js';
+import AuthRouter from './routes/auth.routes.js';
 
 export class Server {
   constructor() {
     this.app = express();
     this.paths = {
       search: '/api/search',
+      auth: '/api/auth',
     };
     this.port = 3001;
 
@@ -17,6 +19,7 @@ export class Server {
 
   setupRoutes() {
     this.app.use(this.paths.search, SearchRouter);
+    this.app.use(this.paths.auth, AuthRouter);
   }
 
   configureMiddlewares() {

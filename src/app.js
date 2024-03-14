@@ -1,14 +1,12 @@
-import { ENV } from './config/env.js';
-import { MssqlDatabase } from './data/sql-server/mssql-database.js';
+import { sequelize } from './data/sql-server/mssql-database.js';
 import { Server } from './server.js';
 
+export let instance;
+
 const main = async () => {
-  await MssqlDatabase.connect({
-    dbName: ENV.DATABASE_NAME,
-    dbUser: ENV.DATABASE_USER,
-    dbPassword: ENV.DATABASE_PASSWORD,
-  });
+  await sequelize.authenticate();
+
+  new Server().startApp();
 };
 
 main();
-new Server().startApp();

@@ -1,19 +1,11 @@
 import { Sequelize } from 'sequelize';
+import { ENV } from '../../config/env.js';
 
-export class MssqlDatabase {
-  static async connect(options) {
-    const { dbName, dbUser, dbPassword } = options;
+const dbName = ENV.DATABASE_NAME;
+const dbUser = ENV.DATABASE_USER;
+const dbPassword = ENV.DATABASE_PASSWORD;
 
-    try {
-      const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
-        host: 'localhost',
-        dialect: 'mssql',
-      });
-
-      await sequelize.authenticate();
-    } catch (error) {
-      console.log('Error connecting to the database ');
-      throw error;
-    }
-  }
-}
+export const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
+  host: 'localhost',
+  dialect: 'mssql',
+});
