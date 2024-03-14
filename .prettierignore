@@ -6,3 +6,5 @@ node_modules
 yarn.lock
 public
 README.md
+
+docker-compose.yml

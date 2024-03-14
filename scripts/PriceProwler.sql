@@ -1,3 +1,6 @@
+CREATE DATABASE priceProwler;
+use priceProwler;
+
 CREATE TABLE users (
 	mail nvarchar(50) not null unique,
 	contrasenia nvarchar(20) not null
