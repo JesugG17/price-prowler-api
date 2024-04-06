@@ -11,7 +11,7 @@ export class Server {
       search: '/api/search',
       auth: '/api/auth',
     };
-    this.port = 3001;
+    this.port = 3002;
 
     this.configureMiddlewares();
     this.setupRoutes();

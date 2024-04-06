@@ -22,10 +22,10 @@ export class SearchController {
         const productPrice = productItem.querySelector('.andes-money-amount__fraction').innerText;
 
         return {
-          productLink,
-          productTitle,
-          productImageBase64,
-          productPrice,
+          link: productLink,
+          name: productTitle,
+          img: productImageBase64,
+          price: productPrice,
         };
       });
 
