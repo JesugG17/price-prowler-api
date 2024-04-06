@@ -4,7 +4,7 @@ import { Server } from './server.js';
 export let instance;
 
 const main = async () => {
-  await sequelize.authenticate();
+  // await sequelize.authenticate();
 
   new Server().startApp();
 };
