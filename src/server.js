@@ -3,6 +3,7 @@ import cors from 'cors';
 
 import SearchRouter from './routes/search-products.routes.js';
 import AuthRouter from './routes/auth.routes.js';
+import AssetsRouter from './routes/assets.routes.js';
 
 export class Server {
   constructor() {
@@ -10,6 +11,7 @@ export class Server {
     this.paths = {
       search: '/api/search',
       auth: '/api/auth',
+      assets: '/api/assets',
     };
     this.port = 3002;
 
@@ -20,6 +22,7 @@ export class Server {
   setupRoutes() {
     this.app.use(this.paths.search, SearchRouter);
     this.app.use(this.paths.auth, AuthRouter);
+    this.app.use(this.paths.assets, AssetsRouter);
   }
 
   configureMiddlewares() {
