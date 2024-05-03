@@ -4,7 +4,7 @@ import { sequelize } from '../mssql-database.js';
 export const Users = sequelize.define(
   'Users',
   {
-    mail: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
