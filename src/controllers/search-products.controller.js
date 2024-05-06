@@ -9,7 +9,7 @@ export class SearchController {
 
     const [page1, page2] = await Promise.all([await context.newPage(), await context.newPage()]);
     await Promise.all([
-      await page1.goto(`https://www.amazon.com.mx/s?k=${productName}`),
+      await page1.goto(`https://www.amazon.com.mx/s?k=${productName}`, { waitUntil: 'domcontentloaded' }),
       await page2.goto(`https://listado.mercadolibre.com.mx/${productName}`),
     ]);
 
@@ -19,13 +19,15 @@ export class SearchController {
           const productImage = element.querySelector('.s-image').src;
           const productNameTag = element.querySelector('h2');
           const productName = productNameTag.querySelector('span').innerText;
+          const productPriceElement = element.querySelector('.a-price.whole');
+          const productPrice = productPriceElement ? productPriceElement.innerText : 0;
           const productLink = element.querySelector('.a-link-normal').getAttribute('href');
 
           return {
             name: productName,
             link: `https://www.amazon.com.mx${productLink}`,
             img: productImage,
-            price: 0,
+            price: productPrice,
             shop: 'Amazon',
           };
         })
@@ -50,8 +52,8 @@ export class SearchController {
 
     const slicedAmazonProducts = productsAmazon.slice(0, 5);
     const sliceMercadoLibreProducts = productsMercadoLibre.slice(0, 5);
-    const allItems = [...slicedAmazonProducts, ...sliceMercadoLibreProducts];
-
+    // const allItems = [...slicedAmazonProducts, ...sliceMercadoLibreProducts];
+    const allItems = [...productsAmazon, ...productsMercadoLibre];
     await browser.close();
     res.json({ data: allItems });
   }
