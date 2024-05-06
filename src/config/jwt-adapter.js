@@ -1,11 +1,10 @@
 import jwt from 'jsonwebtoken';
-
-const secretKey = process.env.SECRET_KEY;
+import { ENV } from './env.js';
 
 export class JwtAdapter {
   static sign(data) {
     return new Promise((resolve) => {
-      jwt.sign(data, secretKey, { expiresIn: '1h' }, (err, token) => {
+      jwt.sign(data, ENV.SECRET_KEY, { expiresIn: '1h' }, (err, token) => {
         if (err) {
           return resolve(err);
         }
@@ -16,7 +15,7 @@ export class JwtAdapter {
 
   static verify(token) {
     return new Promise((resolve) => {
-      jwt.verify(token, secretKey, (err, decoded) => {
+      jwt.verify(token, ENV.SECRET_KEY, (err, decoded) => {
         if (err) {
           return resolve(err);
         }
