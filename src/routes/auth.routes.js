@@ -7,4 +7,6 @@ router.post('/login', AuthController.login);
 
 router.post('/register', AuthController.register);
 
+router.post('/google', AuthController.googleSignIn);
+
 export default router;
