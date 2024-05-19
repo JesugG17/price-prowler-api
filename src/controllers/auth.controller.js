@@ -75,7 +75,12 @@ export class AuthController {
     let user = await Users.findOne({ email: data.email });
 
     if (!user) {
-      user = new Users({ name: data.name, email: data.email, password: HashingAdapter.hash(':P') });
+      user = new Users({
+        name: data.name,
+        email: data.email,
+        password: HashingAdapter.hash(':P'),
+        photoUrl: data.picture,
+      });
       await user.save();
     }
 
@@ -84,9 +89,8 @@ export class AuthController {
     res.json({
       data: {
         user: {
-          userName: user.name,
-          email: user.email,
-          photo: user.photourl,
+          name: user.name,
+          photo: user.photoUrl,
         },
       },
       ok: true,
