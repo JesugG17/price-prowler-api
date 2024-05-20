@@ -4,7 +4,7 @@ import { ENV } from './env.js';
 export class JwtAdapter {
   static sign(data) {
     return new Promise((resolve) => {
-      jwt.sign(data, ENV.SECRET_KEY, { expiresIn: '1h' }, (err, token) => {
+      jwt.sign(data, ENV.SECRET_KEY, { expiresIn: '24h' }, (err, token) => {
         if (err) {
           return resolve(err);
         }

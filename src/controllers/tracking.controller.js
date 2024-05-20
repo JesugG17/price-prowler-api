@@ -4,7 +4,7 @@ import { HTTP_CODE } from '../utils/http-codes.js';
 
 export class TrackingController {
   static async addProduct(req, res) {
-    const { link, currentPrice } = req.body;
+    const { link, currentPrice, img } = req.body;
     const userId = req.userId;
 
     const user = await Users.findById(userId);
@@ -28,14 +28,20 @@ export class TrackingController {
       link,
       lastChecked: new Date(),
       currentPrice,
+      img,
       user,
     };
 
-    const trackingProduct = new Tracks(newTrackingProduct);
-    await trackingProduct.save();
+    const trackingProductDb = new Tracks(newTrackingProduct);
+    await trackingProductDb.save();
+
+    const trackingProduct = {
+      ...trackingProductDb._doc,
+      id: trackingProductDb._id,
+    };
 
     res.status(HTTP_CODE.CREATED).json({
-      data: newTrackingProduct,
+      data: trackingProduct,
       ok: true,
       message: '¡Producto agregado a la wishlist de forma exitosa!',
     });
@@ -56,7 +62,7 @@ export class TrackingController {
     await Tracks.deleteOne({ _id: trackId });
 
     res.json({
-      message: '!Producto removido de la wishlist exitosamente¡',
+      message: '¡Producto removido de la wishlist exitosamente!',
       ok: true,
     });
   }
@@ -68,8 +74,13 @@ export class TrackingController {
       user: userId,
     });
 
+    const formattedTracks = tracks.map((track) => ({
+      ...track._doc,
+      id: track._id,
+    }));
+
     res.json({
-      data: tracks,
+      data: formattedTracks,
       ok: true,
     });
   }

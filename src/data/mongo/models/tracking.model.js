@@ -6,6 +6,10 @@ const trackingSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  img: {
+    type: String,
+    required: true,
+  },
   lastChecked: {
     type: Date,
     required: true,
