@@ -3,4 +3,5 @@ export const HTTP_CODE = {
   CREATED: 201,
   BAD_REQUEST: 400,
   SERVER_ERROR: 501,
+  UNAUTHORIZED: 401,
 };
